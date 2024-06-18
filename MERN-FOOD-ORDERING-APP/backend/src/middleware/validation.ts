@@ -20,7 +20,7 @@ export const validateMyUserRequest = [
     .notEmpty()
     .withMessage("AddressLine1 must be a String"),
   body("city").isString().notEmpty().withMessage("City must be a String"),
-  body("country").isString().notEmpty().withMessage("country must be a String"),
+  body("country").isString().notEmpty().withMessage("Country must be a String"),
   handleValidationsErrors,
 ];
  
