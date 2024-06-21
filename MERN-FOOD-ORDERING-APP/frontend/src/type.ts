@@ -6,4 +6,5 @@ export type User = {
   addressLine1: string;
   city: string;
   country: string;
+  blocked: boolean;
 };
