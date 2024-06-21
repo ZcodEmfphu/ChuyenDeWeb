@@ -18,11 +18,14 @@ export const useGetMyUser = () => {
         "Content-Type": "application/json",
       },
     });
-
     if (!response.ok) {
       throw new Error("Failed to fetch user 1");
     }
-    return response.json();
+    const userData: User = await response.json();
+    if (userData.blocked) {
+      throw new Error("User is blocked");
+    }
+    return userData;
   };
 
   const {

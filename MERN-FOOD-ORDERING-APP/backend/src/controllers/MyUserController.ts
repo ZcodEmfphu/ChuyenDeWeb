@@ -64,10 +64,29 @@ const getAllUsers = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Can't get users" });
   }
 };
+const toggleUserBlockStatus = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
 
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.blocked = !user.blocked; // Đảo ngược trạng thái blocked
+
+    await user.save();
+
+    res.json({ message: `User ${user.blocked ? 'blocked' : 'unblocked'} successfully` });
+  } catch (error) {
+    console.error("Error toggling user block status:", error);
+    res.status(500).json({ message: "Error toggling user block status" });
+  }
+};
 export default {
   getCurrentUser,
   createCurrentUser,
   updateCurrentUser,
   getAllUsers,
+  toggleUserBlockStatus,
 };

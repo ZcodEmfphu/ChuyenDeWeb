@@ -14,7 +14,7 @@ import {
 } from 'recharts';
 import {User} from '../../type';
 import Typed from 'typed.js';
-
+import {  useAuth0 } from "@auth0/auth0-react";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 
@@ -28,10 +28,18 @@ function Home() {
     const [restaurant, setRestaurant] = useState([]);
     const [products, setProduct] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const { getAccessTokenSilently } = useAuth0();
 
     const fetchUsers = async () => {
+        const accessToken = await getAccessTokenSilently();
         try {
-            const response = await fetch(`${API_BASE_URL}/api/my/user/getAllUser`);
+            const response = await fetch(`${API_BASE_URL}/api/my/user/getAllUser`, {
+                method: 'GET',
+                headers: {
+                  Authorization: `Bearer ${accessToken}`,
+                  'Content-Type': 'application/json',
+                },
+              });
             if (!response.ok) {
                 throw new Error('Failed to fetch users');
             }
@@ -79,13 +87,18 @@ function Home() {
     }, []);
 
     const data = [
-        { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
-        { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
-        { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
-        { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
-        { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
-        { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
-        { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
+        { name: 'January', uv: 4000, pv: 2400, amt: 2400 },
+        { name: 'February', uv: 3000, pv: 1398, amt: 2210 },
+        { name: 'March', uv: 2000, pv: 9800, amt: 2290 },
+        { name: 'April', uv: 2780, pv: 3908, amt: 2000 },
+        { name: 'May', uv: 1890, pv: 4800, amt: 2181 },
+        { name: 'June', uv: 2390, pv: 3800, amt: 2500 },
+        { name: 'July', uv: 3490, pv: 4300, amt: 2100 },
+        { name: 'August', uv: 3480, pv: 4330, amt: 2100 },
+        { name: 'September', uv: 3500, pv: 4200, amt: 2100 },
+        { name: 'October', uv: 3400, pv: 4000, amt: 2100 },
+        { name: 'November', uv: 3600, pv: 4350, amt: 2100 },
+        { name: 'December', uv: 3480, pv: 4300, amt: 2100 },
     ];
 
     return (
@@ -136,8 +149,8 @@ function Home() {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="pv" fill="#8884d8" />
-                        <Bar dataKey="uv" fill="#82ca9d" />
+                        <Bar dataKey="pv" fill="#8884d8" name="2023" />
+                        <Bar dataKey="uv" fill="#82ca9d" name="2024" />
                     </BarChart>
                 </ResponsiveContainer>
 
@@ -153,8 +166,8 @@ function Home() {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                        <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} name="2023"/>
+                        <Line type="monotone" dataKey="uv" stroke="#82ca9d" name="2024"/>
                     </LineChart>
                 </ResponsiveContainer>
             </div>

@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
   country: {
     type: String,
   },
+  blocked: {
+    type: Boolean,
+    default:false,
+  },
 });
 
 const User = mongoose.model("User", userSchema);
