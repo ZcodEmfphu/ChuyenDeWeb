@@ -15,4 +15,5 @@ router.put(
   validateMyUserRequest,
   MyUserController.updateCurrentUser
 );
+router.get("/getAllUser", MyUserController.getAllUsers);
 export default router;
