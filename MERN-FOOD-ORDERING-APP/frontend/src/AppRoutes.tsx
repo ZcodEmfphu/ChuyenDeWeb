@@ -4,6 +4,8 @@ import HomePage from "./pages/HomePage";
 import AuthCallbackPage from "./pages/AuthCallBackPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import ProtectedRoute from "./auth/ProtectedRoute";
+import Admin from "./pages/admin/Admin";
+import Customers from "./pages/admin/Customers";
 
 const AppRoutes = () => {
   return (
@@ -26,7 +28,24 @@ const AppRoutes = () => {
             </Layout>
           }
         />
+        <Route
+          path="/admin"
+          element={
+            <Layout>
+              <Admin />
+            </Layout>
+          }
+        />
+        <Route
+          path="/customers"
+          element={
+            <Layout>
+              <Customers />
+            </Layout>
+          }
+        />
       </Route>
+      
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

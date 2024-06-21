@@ -55,9 +55,19 @@ const updateCurrentUser = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error updating user" });
   }
 };
+const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Can't get users" });
+  }
+};
 
 export default {
   getCurrentUser,
   createCurrentUser,
   updateCurrentUser,
+  getAllUsers,
 };
