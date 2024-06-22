@@ -4,6 +4,7 @@ import "dotenv/config";
 import mongoose from "mongoose";
 
 import myUserRoute from "./routes/MyUserRoute";
+import myRestaurantRoute from "./routes/MyRestaurantRoute";
 
 // connect mongoose
 mongoose
@@ -16,6 +17,7 @@ app.use(cors());
 
 // /aip/my/user
 app.use("/api/my/user", myUserRoute);
+app.use("/api/my/restaurant", myRestaurantRoute);
 
 // app.get("/test", async (req: Request, res: Response) => {
 //   res.json({ message: "Hello " });
