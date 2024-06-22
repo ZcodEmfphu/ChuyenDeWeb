@@ -4,6 +4,8 @@ import "dotenv/config";
 import mongoose from "mongoose";
 
 import myUserRoute from "./routes/MyUserRoute";
+import myRestaurantRoute from "./routes/MyRestaurantRoute";
+import { v2 as cloudinary } from "cloudinary";
 
 // connect mongoose
 mongoose
