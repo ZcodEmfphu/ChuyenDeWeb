@@ -5,7 +5,7 @@ import Restaurant from "../models/restaurant";
 
 const createMyRestaurant = async (req: Request, res: Response) => {
   try {
-    const existingRestaurant = await Restaurant.find({ user: req.userId });
+    const existingRestaurant = await Restaurant.findOne({ user: req.userId });
 
     if (existingRestaurant) {
       return res
